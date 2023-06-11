@@ -1,0 +1,7 @@
+version: '3.8'
+
+services:
+  currency-exchange:
+    build: ./currency-exchange
+    ports:
+      - "8291:8291"

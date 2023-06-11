@@ -16,12 +16,12 @@ public class CurrencyExchangePojo {
 
 	}
 
-	public CurrencyExchangePojo(long id, String to, String from, BigDecimal conversionMutliple) {
+	public CurrencyExchangePojo(long id, String to, String from, BigDecimal conversionMultiple) {
 		super();
 		this.id = id;
 		this.to = to;
 		this.from = from;
-		this.conversionMutliple = conversionMutliple;
+		this.conversionMultiple = conversionMultiple;
 	}
 
 	@Id
@@ -36,7 +36,7 @@ public class CurrencyExchangePojo {
 	private String from;
 
 	@Column(name = "conversion_value")
-	private BigDecimal conversionMutliple;
+	private BigDecimal conversionMultiple;
 
 	@Transient
 	private BigDecimal inputValue;
@@ -68,11 +68,11 @@ public class CurrencyExchangePojo {
 	}
 
 	public BigDecimal getConversionMutliple() {
-		return conversionMutliple;
+		return conversionMultiple;
 	}
 
 	public void setConversionMutliple(BigDecimal conversionMutliple) {
-		this.conversionMutliple = conversionMutliple;
+		this.conversionMultiple = conversionMutliple;
 	}
 
 	public BigDecimal getInputValue() {
@@ -93,7 +93,7 @@ public class CurrencyExchangePojo {
 
 	@Override
 	public String toString() {
-		return "CurrencyExchangePojo [id=" + id + ", to=" + to + ", from=" + from + ", conversionMutliple="
-				+ conversionMutliple + ", inputValue=" + inputValue + ", outputValue=" + outputValue + "]";
+		return "CurrencyExchangePojo [id=" + id + ", to=" + to + ", from=" + from + ", conversionMultiple="
+				+ conversionMultiple + ", inputValue=" + inputValue + ", outputValue=" + outputValue + "]";
 	}
 }
