@@ -10,14 +10,9 @@ services:
   mysqldb:
     image: mysql:latest
     container_name: mysql
-    networks:
-      - core-ms
     ports:
       - "3306:3306"
-    volumes:
-      - ./init:/docker-entrypoint-initdb.d
-      - mdb_data:/var/lib/mysql
     environment:
-      MYSQL_DATABASE: currency-exchange-db
+      MYSQL_DATABASE: currency_exchange_db
       MYSQL_ROOT_USER: anurag
       MYSQL_ROOT_PASSWORD: garg
