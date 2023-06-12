@@ -1,0 +1,28 @@
+#running the application on port 8291
+server:
+  port: '8291'
+
+spring:
+
+  # for h2 database
+  h2:
+    console:
+      enabled: 'true'
+  datasource:
+    url: jdbc:h2:mem:testdb
+
+  #set application name
+  application:
+    name: currency-exchange-service
+
+  # jpa configuration
+  jpa:
+    defer-datasource-initialization: 'true '
+    show-sql: "true\t"
+
+#enabled debug logging
+logging:
+  level:
+    org:
+      springframework: info
+
