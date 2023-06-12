@@ -14,8 +14,7 @@ spring:
     #url: jdbc:h2:mem:testdb
 
     # mysql database
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://mysqldb:3306/currency_exchange_db?autoReconnect=true&useSSL=false
+    url: jdbc:mysql://mysqldb:3306/currency_exchange_db?autoReconnect=true&allowPublicKeyRetrieval=true&useSSL=false
     username: root
     password: password
 
