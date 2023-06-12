@@ -16,6 +16,11 @@ public class CurrencyExchangeController {
     @Autowired
     CurrencyExchangeRepository repository;
 
+    @GetMapping("/test")
+    public String getHelloWorld() {
+        return "Currency Exchange service is working fine";
+    }
+    
     @GetMapping("/currency-exchange/from/{fromCurrency}/to/{toCurrency}/value/{amount}")
     public CurrencyExchangePojo getCurrencyExchange(@PathVariable("fromCurrency") String from,
                                                     @PathVariable("toCurrency") String to,
