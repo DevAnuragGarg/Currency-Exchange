@@ -19,15 +19,28 @@ spec:
         name: currency-exchange
         ports:
         - containerPort: 8291
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysqldb-secret
+                key: mysql-root-password
+          - name: MYSQL_SERVER_URL
+            valueFrom:
+              configMapKeyRef:
+                name: mysqldb-configmap
+                key: database_url
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: currency-exchange-service
 spec:
+  type: LoadBalancer
   ports:
     - protocol: TCP
       port: 8291
       targetPort: 8291
+      nodePort: 30203
   selector:
     app: currency-exchange

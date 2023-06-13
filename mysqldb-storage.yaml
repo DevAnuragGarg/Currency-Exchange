@@ -8,11 +8,13 @@ metadata:
 spec:
   storageClassName: manual
   capacity:
-    storage: 2Gi
+    storage: 3Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
     path: "/mnt/data"
+    # try /mnt/disks
+    # persistVolumeReclaimPolicy: Retain
 ---
 # will provision a storage when applied, this file on the other hand will create a Persistent Volume Claim that will be used by the MySQL Pod to request for that provisioned storage.
 apiVersion: v1
