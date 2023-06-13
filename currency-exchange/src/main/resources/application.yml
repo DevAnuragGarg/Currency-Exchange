@@ -17,7 +17,7 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://mysqldb:3306/currency_exchange_db?autoReconnect=true&useSSL=false
     username: root
-    password: password
+    password: root
 
   # jpa configuration
   jpa:

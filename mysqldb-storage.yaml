@@ -1,0 +1,28 @@
+# will provision a Persistent Volume, for the MySQL database server Pod. The persistent volume will not depend on the pod's lifecycle. This means that anytime the pod restarts due to a crash or a malfunction, the provisioned storage will survive.
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data"
+---
+# will provision a storage when applied, this file on the other hand will create a Persistent Volume Claim that will be used by the MySQL Pod to request for that provisioned storage.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pv-claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
