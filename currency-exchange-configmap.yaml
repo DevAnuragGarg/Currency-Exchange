@@ -4,3 +4,4 @@ metadata:
   name: mysqldb-configmap
 data:
   database_url: mysqldb-service
+  database_name: currency_exchange_db

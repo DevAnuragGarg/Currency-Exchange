@@ -4,7 +4,7 @@ kind: PersistentVolume
 metadata:
   name: mysql-pv-volume
   labels:
-    type: local
+    app: mysqldb
 spec:
   storageClassName: manual
   capacity:
@@ -12,15 +12,15 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/mnt/data"
-    # try /mnt/disks
-    # persistVolumeReclaimPolicy: Retain
+    path: "/mnt/disks"
 ---
 # will provision a storage when applied, this file on the other hand will create a Persistent Volume Claim that will be used by the MySQL Pod to request for that provisioned storage.
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: mysql-pv-claim
+  labels:
+    app: mysqldb
 spec:
   storageClassName: manual
   accessModes:

@@ -8,10 +8,11 @@ Response:
 {"id":1000,"to":"INR","from":"USD","conversionMutliple":65.00,"inputValue":50,"outputValue":3250.00}
 
 
+## DOCKER
 
-// creating the build
-Run maven command:
-mvn clean package -Dmaven.test.skip=true
+For creating the build run maven command:
+***mvn clean package -Dmaven.test.skip=true***
+
 Clears the target directory and builds the project and packages the resulting JAR file into the target directory - without running the unit tests during the build.
 
 //if lifecycle phase not found exception is coming then go to this link and run commands
@@ -50,7 +51,7 @@ docker run -p 8291:8291 docker-image-name
 docker login
 if not logged in it will ask for username and password otherwise it will show successfully logged in
 
-// docker tagggin before pushing, add username infront
+// docker tagging before pushing, add username in front
 docker tag currency-exchange:0.0.1 devanurag/currency-exchange:0.0.1
 
 // a new image will be created and then push the same file
@@ -58,6 +59,15 @@ docker push devanurag/currency-exchange:0.0.1
 
 // to use the docker compose
 use docker-compose up
+
+List all the running containers
+```bash
+docker container ls
+```
+TO get the list of containers running
+docker ps
+
+docker system prune
 
 // create database
 docker run --env MYSQL_ROOT_PASSWORD=root --env MYSQL_DATABASE=currency_exchange_db --name mysqldb --publish 3306:3306 mysql
@@ -71,9 +81,14 @@ insert into currency_exchange (conversion_id, conversion_value, conversion_from,
 values(1002, 75, 'EUR', 'INR');
 insert into currency_exchange (conversion_id, conversion_value, conversion_from, conversion_to)
 values(1003, 25, 'AUD', 'INR');
+insert into currency_exchange (conversion_id, conversion_value, conversion_from, conversion_to)
+values(1003, 103, 'GBP', 'INR');
+insert into currency_exchange (conversion_id, conversion_value, conversion_from, conversion_to)
+values(1003, 267, 'KWD', 'INR');
 
 
 
+https://www.bezkoder.com/docker-compose-spring-boot-mysql/
 
 https://codelabs.developers.google.com/codelabs/cloud-springboot-kubernetes#0
 
@@ -87,14 +102,26 @@ https://github.com/RameshMF/springboot-docker-course/tree/main
 
 https://github.com/Java-Techie-jt/springboot-crud-k8s
 
+https://www.youtube.com/watch?v=pIPji3_rYPY
+
+https://www.youtube.com/watch?v=-ekBqIvAGY4
+
+https://www.youtube.com/watch?v=6hMHziv0T2Y
 
 
-
-
+## KUBERNETES
 
 For applying and checking the secret
+
+```bash
 kubectl apply -f mysqldb-secret.yaml
+```
+
+To check the secret
+```bash
 kubectl get secret
+```
+
 
 For applying the deployment
 kubectl apply -f mysqldb-deployment.yaml
@@ -128,7 +155,7 @@ kubectl get pod --watch
 // if you want to know if something is wrong or not
 kubectl describe pod <pod-name>
 
-kubectl decribe deploy
+kubectl describe deploy
 
 // delete everything
 kubectl delete all --all
@@ -155,21 +182,6 @@ https://openliberty.io/guides/kubernetes-intro.html#deploying-the-microservices
 https://dev.to/musolemasu/deploy-a-mysql-database-server-in-kubernetes-static-dpc
 https://gitlab.com/nanuchi/youtube-tutorial-series/-/tree/master/demo-kubernetes-components
 
-
-# initial dependency
-FROM openjdk:17
-
-# maintainer of the project
-LABEL maintainer="Anurag Garg <developer.anuraggarg@gmail.com>"
-
-# exposing the port for the service
-EXPOSE 8291
-
-#add the jar file, need to replace add with copy
-ADD target/currency-exchange-0.0.2-SNAPSHOT.jar currency-exchange-0.0.2-SNAPSHOT.jar
-
-# run this jar
-ENTRYPOINT ["java", "-jar", "currency-exchange-0.0.2-SNAPSHOT.jar"]
 
 Command to create the deployment:
 kubectl create deployment current-exchange-api --image=devanurag/currency-exchange:TAG
@@ -203,3 +215,9 @@ kubectl set image deployment <deployment-id> <container-id>=<image-name>
 
 Get the container-id for the deployment using replicaset
 kubectl get rs -o wide
+
+
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)

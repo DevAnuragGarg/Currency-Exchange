@@ -15,7 +15,7 @@ spec:
         app: currency-exchange
     spec:
       containers:
-      - image: devanurag/currency-exchange:0.0.4
+      - image: devanurag/currency-exchange:0.0.5
         name: currency-exchange
         ports:
         - containerPort: 8291
