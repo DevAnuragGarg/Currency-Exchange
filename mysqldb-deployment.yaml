@@ -40,14 +40,15 @@ spec:
 #          persistentVolumeClaim:
 #            claimName: mysql-pv-claim
 ---
+# Define a 'Service' To Expose MySQL to Other Services
 apiVersion: v1
 kind: Service
 metadata:
   name: mysqldb-service
 spec:
   ports:
-    - protocol: TCP
-      port: 3306
+    - port: 3306
       targetPort: 3306
   selector:
     app: mysqldb
+  clusterIP: None # DNS is used, so clusterIP is not needed

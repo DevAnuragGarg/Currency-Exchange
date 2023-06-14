@@ -8,7 +8,7 @@ LABEL maintainer="Anurag Garg <developer.anuraggarg@gmail.com>"
 EXPOSE 8291
 
 #add the jar file, need to replace add with copy
-ADD target/currency-exchange-0.0.6-SNAPSHOT.jar currency-exchange-0.0.6-SNAPSHOT.jar
+ADD target/currency-exchange-0.0.9-SNAPSHOT.jar currency-exchange-0.0.9-SNAPSHOT.jar
 
 # run this jar
-ENTRYPOINT ["java", "-jar", "currency-exchange-0.0.6-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "currency-exchange-0.0.9-SNAPSHOT.jar"]

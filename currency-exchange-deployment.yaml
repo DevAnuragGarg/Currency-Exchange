@@ -15,21 +15,31 @@ spec:
         app: currency-exchange
     spec:
       containers:
-      - image: devanurag/currency-exchange:0.0.5
+      - image: devanurag/currency-exchange:0.0.9
         name: currency-exchange
         ports:
         - containerPort: 8291
         env:
-          - name: MYSQL_ROOT_PASSWORD
+          - name: MYSQL_SPRING_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: mysqldb-secret
                 key: mysql-root-password
-          - name: MYSQL_SERVER_URL
+          - name: MYSQL_SPRING_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: mysqldb-secret
+                key: mysql-root-username
+          - name: MYSQL_SPRING_HOSTNAME
             valueFrom:
               configMapKeyRef:
                 name: mysqldb-configmap
                 key: database_url
+          - name: MYSQL_SPRING_DATABASE
+            valueFrom:
+              configMapKeyRef:
+                name: mysqldb-configmap
+                key: database_name
 ---
 apiVersion: v1
 kind: Service
@@ -41,6 +51,6 @@ spec:
     - protocol: TCP
       port: 8291
       targetPort: 8291
-      nodePort: 30203
+      nodePort: 30205
   selector:
     app: currency-exchange

@@ -6,7 +6,7 @@ spring:
   #database configuration
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://mysqldb-service:3306/currency_exchange_db?autoReconnect=true&useSSL=false
+    url: jdbc:mysql://mysqldb-service:3306/currency_exchange_db?autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: root
 

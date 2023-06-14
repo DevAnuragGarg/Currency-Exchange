@@ -22,52 +22,65 @@ mvn package is the solution
 All the maven commands
 https://jenkov.com/tutorials/maven/maven-commands.html
 
-// for creating the docker image
-For creating the docker image there are two days:
+Docker images can be created in two ways: 
 1) Adding the docker plugin details in the pom.xml file and maven build the project.
+   Add this line below maven plugin
+   ```xml
+   <configuration>
+      <image>
+        <name>devanurag/${project.artifactId}:${project.version}</name>
+      </image>
+      <pullPolicy>IF_NOT_PRESENT</pullPolicy>
+   </configuration>
+   ```
+   Here devanurag is the docker hub username. Then run this command in maven build.
+   ```bash
+   spring-boot:build-image -DskipTests
+   ```
+   This will create the docker image with the name *devanurag/currency-exchange:<TAG>*
 
-Add this line below maven plugin
-<configuration>
-<image>
-<name>devAnurag/${project.artifactId}:${project.version}
-</image>
-<pullPolicy>IF_NOT_PRESENT</pullPolicy>
-</configuration>
+2) Another way using the command line by creating the docker image from the jar file as mentioned in Dockerfile
+```bash
+docker build -t currency-exchange:<TAG> .
+```
+-t is for tagging the image. currency-exchange is the name of the image. TAG is the tag you want to add to that image. 
+If you don’t add any tag, it defaults to the tag named latest. . means, we are referring to the Dockerfile location as the docker build context.
 
-Then run this command in maven build..
-spring-boot:build-image -DskipTests
+For running the docker image generated
+```bash
+docker run -p 8291:8291 currency-exchange:<TAG>
+```
 
-2) Create docker file and run command
-   docker build -t currency-exchange:tag .
-   -t is for tagging the image.
-   nginx is the name of the image.
-   1.0 is the tag name. If you don’t add any tag, it defaults to the tag named latest.
-   . means, we are referring to the Dockerfile location as the docker build context.
-
-// for running the docker image
-docker run -p 8291:8291 docker-image-name
-
-// check whether you are logged in using your docker credentials
+Check if you are logged in, if not logged in, it will ask for username and password
+```bash
 docker login
-if not logged in it will ask for username and password otherwise it will show successfully logged in
+```
 
-// docker tagging before pushing, add username in front
-docker tag currency-exchange:0.0.1 devanurag/currency-exchange:0.0.1
+Change the docker tag before pushing, add docker username (hub.docker.com) in front of the image. It will push the image to that username account. 
+```bash
+docker tag currency-exchange:<TAG> devanurag/currency-exchange:<TAG>
+```
 
-// a new image will be created and then push the same file
-docker push devanurag/currency-exchange:0.0.1
+Push the docker image to docker hub
+```bash
+docker push devanurag/currency-exchange:<TAG>
+```
 
-// to use the docker compose
-use docker-compose up
+Run the docker using docker compose file
+```bash
+docker-compose up
+```
 
 List all the running containers
 ```bash
 docker container ls
-```
-TO get the list of containers running
+OR
 docker ps
-
+```
+Remove all unused containers, networks, images
+```bash
 docker system prune
+```
 
 // create database
 docker run --env MYSQL_ROOT_PASSWORD=root --env MYSQL_DATABASE=currency_exchange_db --name mysqldb --publish 3306:3306 mysql
@@ -111,54 +124,73 @@ https://www.youtube.com/watch?v=6hMHziv0T2Y
 
 ## KUBERNETES
 
-For applying and checking the secret
-
+For applying the secret
 ```bash
 kubectl apply -f mysqldb-secret.yaml
 ```
 
-To check the secret
+To check the secret is successfully applied
 ```bash
 kubectl get secret
 ```
 
-
-For applying the deployment
-kubectl apply -f mysqldb-deployment.yaml
-
-// to check if the service is attached to right pod:
-kubectl get service
-kubectl describe service <service-name (DB ClusterIP)>
-There you can check the IP address of the pod
-
-// run the config map
+For applying the configmap
+```bash
 kubectl apply -f currency-exchange-configmap.yaml
+```
 
-// go into that mysql pod
-kubectl exec -it <pod-name> --bash
+To check the configmap is successfully applied
+```bash
+kubectl get configmap
+```
 
-// check the config map
-kubectl get configmaps
+Now, applying the mysql database deployment
+```bash
+kubectl apply -f mysqldb-deployment.yaml
+```
 
-// run the currency-exchange deployment
+To check if the mysql server is running
+```bash
+kubectl exec -it <mysql-pod-name> --bash
+bash-4.4# mysql currency_exchange_db -u root -p
+```
+
+If mysql server is running login using the credentials, you will be logged in
+```bash
+bash-4.4# mysql currency_exchange_db -u root -p
+```
+
+Let's get the port number and more information about mysql pod
+```bash
+kubectl describe pod <mysql-pod-name>
+```
+
+To check if the mysql service is running, on what type, IP address and Port:
+```bash
+kubectl get service
+OR
+kubectl describe service <mysql-service-name>
+```
+
+Now, let's deploy the currency exchange service
+```bash
 kubectl apply -f currency-exchange-deployment.yaml
+```
 
-// check the IP address of the mysql pod
-kubectl get pod -o wide
-
-// get all the values
-kubectl get all
-
-// check what is happening with the pod
+Keep on checking with the pod, what's happening
+```bash
 kubectl get pod --watch
+```
 
-// if you want to know if something is wrong or not
-kubectl describe pod <pod-name>
+Check the logs for the pod
+```bash
+kubectl logs --tail=-1 <pod-name>
+```
 
-kubectl describe deploy
-
-// delete everything
+// delete everything (pods, deployments, containers, services)
+```bash
 kubectl delete all --all
+```
 
 // run in mysql interactive mode
 kubectl run -it --rm --image=mysql:8.0 --restart=Never mysql-client -- mysql -h mysql -password="password"
@@ -175,6 +207,7 @@ kubectl get pvc
 // to edit the file, use 
 vi <yaml file>
 
+https://www.kindsonthegenius.com/deploy-springboot-with-mysql-to-kubernetes-minikube-step-by-step-tutorial/
 https://github.com/piomin/sample-spring-microservices-kubernetes/tree/master/k8s
 https://www.youtube.com/watch?v=qmDzcu5uY1I
 https://www.youtube.com/watch?v=EQNO_kM96Mo
@@ -194,28 +227,6 @@ kubectl get pods
 
 Get little more description of the pods
 kubectl get pods -o wide
-
-Get the number of replicaset:
-kubectl get replicasets
-
-Get the number of services:
-kubectl get services
-
-Get the number of deployments:
-kubectl get deployments
-
-Increasing the number of pods running at one time
-kubectl scale deployment current-exchange-api --replicas=4
-
-Delete the pod
-kubectl delete pod <pod-id>
-
-Deploying the new image to the deployment
-kubectl set image deployment <deployment-id> <container-id>=<image-name>
-
-Get the container-id for the deployment using replicaset
-kubectl get rs -o wide
-
 
 
 ## License
