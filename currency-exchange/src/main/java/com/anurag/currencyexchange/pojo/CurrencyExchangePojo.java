@@ -40,8 +40,21 @@ public class CurrencyExchangePojo {
 
 	@Transient
 	private BigDecimal inputValue;
+
 	@Transient
-	private BigDecimal outputValue;
+	private BigDecimal usdToInrValue;
+
+	@Transient
+	private BigDecimal eurToInrValue;
+
+	@Transient
+	private BigDecimal audToInrValue;
+
+	@Transient
+	private BigDecimal gbpToInrValue;
+
+	@Transient
+	private BigDecimal kwdToInrValue;
 
 	public Long getId() {
 		return id;
@@ -83,17 +96,59 @@ public class CurrencyExchangePojo {
 		this.inputValue = inputValue;
 	}
 
-	public BigDecimal getOutputValue() {
-		return outputValue;
+	public BigDecimal getConversionMultiple() {
+		return conversionMultiple;
 	}
 
-	public void setOutputValue(BigDecimal outputValue) {
-		this.outputValue = outputValue;
+	public void setConversionMultiple(BigDecimal conversionMultiple) {
+		this.conversionMultiple = conversionMultiple;
+	}
+
+	public BigDecimal getUsdToInrValue() {
+		return usdToInrValue;
+	}
+
+	public void setUsdToInrValue(BigDecimal usdToInrValue) {
+		this.usdToInrValue = usdToInrValue;
+	}
+
+	public BigDecimal getEurToInrValue() {
+		return eurToInrValue;
+	}
+
+	public void setEurToInrValue(BigDecimal eurToInrValue) {
+		this.eurToInrValue = eurToInrValue;
+	}
+
+	public BigDecimal getAudToInrValue() {
+		return audToInrValue;
+	}
+
+	public void setAudToInrValue(BigDecimal audToInrValue) {
+		this.audToInrValue = audToInrValue;
+	}
+
+	public BigDecimal getGbpToInrValue() {
+		return gbpToInrValue;
+	}
+
+	public void setGbpToInrValue(BigDecimal gbpToInrValue) {
+		this.gbpToInrValue = gbpToInrValue;
+	}
+
+	public BigDecimal getKwdToInrValue() {
+		return kwdToInrValue;
+	}
+
+	public void setKwdToInrValue(BigDecimal kwdToInrValue) {
+		this.kwdToInrValue = kwdToInrValue;
 	}
 
 	@Override
 	public String toString() {
 		return "CurrencyExchangePojo [id=" + id + ", to=" + to + ", from=" + from + ", conversionMultiple="
-				+ conversionMultiple + ", inputValue=" + inputValue + ", outputValue=" + outputValue + "]";
+				+ conversionMultiple + ", inputValue=" + inputValue + ", usdToInrValue=" + usdToInrValue
+				+ ", eurToInrValue=" + eurToInrValue + ", audToInrValue=" + audToInrValue + ", gbpToInrValue="
+				+ gbpToInrValue + ", kwdToInrValue=" + kwdToInrValue + "]";
 	}
 }

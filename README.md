@@ -76,15 +76,15 @@ TABLE QUERIES
 SELECT * FROM currency_exchange;
 
 insert into currency_exchange (conversion_id, conversion_value, conversion_from, conversion_to)
-values(1001, 65, 'USD', 'INR');
+values(1001, 82, 'USD', 'INR');
 insert into currency_exchange (conversion_id, conversion_value, conversion_from, conversion_to)
-values(1002, 75, 'EUR', 'INR');
+values(1002, 89, 'EUR', 'INR');
 insert into currency_exchange (conversion_id, conversion_value, conversion_from, conversion_to)
-values(1003, 25, 'AUD', 'INR');
+values(1003, 55, 'AUD', 'INR');
 insert into currency_exchange (conversion_id, conversion_value, conversion_from, conversion_to)
-values(1003, 103, 'GBP', 'INR');
+values(1004, 103, 'GBP', 'INR');
 insert into currency_exchange (conversion_id, conversion_value, conversion_from, conversion_to)
-values(1003, 267, 'KWD', 'INR');
+values(1005, 267, 'KWD', 'INR');
 
 
 
