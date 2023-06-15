@@ -1,5 +1,9 @@
 # Currency-Exchange Service
-Currency exchange is Java based web application using latest version of spring boot, jpa, hibernate, mysql. Main aim of this web service is to convert provided amount of the world popular currencies into indian rupees. Majorly 5 currencies are being converted into INR.
+Currency exchange is Java based web application using latest version of spring boot, jpa, hibernate, mysql. Main aim of 
+this web service is to convert provided amount in the API from the world popular currencies into indian rupee. 
+Majorly 5 currencies are being converted into INR, in this project. We will insert the conversion value from these
+currencies to INR into the database and when we hit the currency-exchange api with the amount, it will convert that amount
+of currency into INR. Ex. for amount entered 1, all the corresponding currency values are converted into INR.
 1) ***USD***: American dollar => 1USD = ₹82 
 2) ***EUR***: Euro=> 1 EUR = ₹89
 3) ***AUD***: Australian dollar => 1 AUD = ₹55
@@ -19,7 +23,7 @@ Currency exchange is Java based web application using latest version of spring b
    ```text
    Currency Exchange service is working fine
    ```
-2) Exchange rate DB insertion API: ***POST*** http://34.170.27.49:8291/currency-exchange/indian-ruppee/for/20
+2) Exchange rate DB insertion API: ***POST*** http://34.170.27.49:8291/currency-exchange
    Request Body:
    ```json
    [
