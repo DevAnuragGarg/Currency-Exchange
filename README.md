@@ -187,7 +187,17 @@ Check the logs for the pod
 kubectl logs --tail=-1 <pod-name>
 ```
 
-// delete everything (pods, deployments, containers, services)
+Get all the deployments
+```bash
+kubectl get deploy
+```
+
+For deleting the deployment
+```bash
+kubectl delete deploy <deployment-name>
+```
+
+For deleting everything (pods, deployments, containers, services)
 ```bash
 kubectl delete all --all
 ```
@@ -204,9 +214,6 @@ kubectl get pv
 // for claim
 kubectl get pvc
 
-// to edit the file, use 
-vi <yaml file>
-
 https://www.kindsonthegenius.com/deploy-springboot-with-mysql-to-kubernetes-minikube-step-by-step-tutorial/
 https://github.com/piomin/sample-spring-microservices-kubernetes/tree/master/k8s
 https://www.youtube.com/watch?v=qmDzcu5uY1I
@@ -215,19 +222,7 @@ https://openliberty.io/guides/kubernetes-intro.html#deploying-the-microservices
 https://dev.to/musolemasu/deploy-a-mysql-database-server-in-kubernetes-static-dpc
 https://gitlab.com/nanuchi/youtube-tutorial-series/-/tree/master/demo-kubernetes-components
 
-
-Command to create the deployment:
-kubectl create deployment current-exchange-api --image=devanurag/currency-exchange:TAG
-
-Exposing the deployment to outer world on particular port:
-kubectl expose deployment current-exchange-api --type=LoadBalancer --port=8291
-
-Get the number of running nodes:
-kubectl get pods
-
-Get little more description of the pods
-kubectl get pods -o wide
-
+https://cloud.google.com/kubernetes-engine/docs/concepts/persistent-volumes#:~:text=GKE%20creates%20a%20default%20StorageClass,default%20StorageClass%20with%20your%20own.
 
 ## License
 
