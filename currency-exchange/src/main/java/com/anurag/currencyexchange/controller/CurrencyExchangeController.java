@@ -36,6 +36,12 @@ public class CurrencyExchangeController {
 
 		CurrencyExchangePojo responseCurrencyExchange = new CurrencyExchangePojo();
 		responseCurrencyExchange.setInputValue(conversionAmount);
+		
+		// setting the values
+		responseCurrencyExchange.setId(1L);
+		responseCurrencyExchange.setTo("INR");
+		responseCurrencyExchange.setFrom("USD-EUR-AUD-GBP-KWD");
+		responseCurrencyExchange.setConversionMultiple(BigDecimal.ONE);
 
 		// get the data from the repository
 		Iterable<CurrencyExchangePojo> currencyExchanges = repository.findAll();

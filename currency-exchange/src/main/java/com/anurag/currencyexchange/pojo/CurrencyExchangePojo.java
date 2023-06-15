@@ -80,14 +80,6 @@ public class CurrencyExchangePojo {
 		this.from = from;
 	}
 
-	public BigDecimal getConversionMutliple() {
-		return conversionMultiple;
-	}
-
-	public void setConversionMutliple(BigDecimal conversionMutliple) {
-		this.conversionMultiple = conversionMutliple;
-	}
-
 	public BigDecimal getInputValue() {
 		return inputValue;
 	}
