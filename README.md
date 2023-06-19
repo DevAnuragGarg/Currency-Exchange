@@ -18,7 +18,7 @@ of currency into INR. Ex. for amount entered 1, all the corresponding currency v
 **Docker hub link of all the images created is _[here](https://hub.docker.com/repository/docker/devanurag/currency-exchange/general)_**.
 
 ### Endpoints
-1) Test URL (If everything is working fine): ***GET*** http://34.170.27.49:8291/currency-exchange/indian-ruppee/for/20
+1) Test URL (If everything is working fine): ***GET*** http://34.170.27.49:8291/test
    Response Body: 
    ```text
    Currency Exchange service is working fine
@@ -54,7 +54,7 @@ of currency into INR. Ex. for amount entered 1, all the corresponding currency v
     }
    ]
    ```
-3) Requesting conversion values for amount input: ***GET*** http://34.170.27.49:8291/currency-exchange/indian-ruppee/for/20
+3) Requesting conversion values for amount input: ***GET*** http://34.170.27.49:8291/currency-exchange/indian-rupee/for/20
    Response Body:
    ```json
    {
@@ -150,7 +150,7 @@ kubectl get secret
 
 For applying the configmap
 ```bash
-kubectl apply -f currency-exchange-configmap.yaml
+kubectl apply -f mysqldb-configmap.yaml
 ```
 
 To check the configmap is successfully applied
@@ -203,7 +203,7 @@ kubectl apply -f currency-exchange-deployment.yaml
 
 Keep on checking with the pod, what's happening
 ```bash
-kubectl get pod --watch
+kubectl get pod <pod-name> --watch
 ```
 
 Check the logs for the pod
@@ -237,37 +237,24 @@ rm *
 ```
 
 ## References
-https://www.kindsonthegenius.com/deploy-springboot-with-mysql-to-kubernetes-minikube-step-by-step-tutorial/
-https://github.com/piomin/sample-spring-microservices-kubernetes/tree/master/k8s
-https://www.youtube.com/watch?v=qmDzcu5uY1I
-https://www.youtube.com/watch?v=EQNO_kM96Mo
-https://openliberty.io/guides/kubernetes-intro.html#deploying-the-microservices
-https://dev.to/musolemasu/deploy-a-mysql-database-server-in-kubernetes-static-dpc
-https://gitlab.com/nanuchi/youtube-tutorial-series/-/tree/master/demo-kubernetes-components
-https://cloud.google.com/kubernetes-engine/docs/concepts/persistent-volumes#:~:text=GKE%20creates%20a%20default%20StorageClass,default%20StorageClass%20with%20your%20own.
-https://www.bezkoder.com/docker-compose-spring-boot-mysql/
-https://codelabs.developers.google.com/codelabs/cloud-springboot-kubernetes#0
-https://medium.com/@dayan888/sample-java-web-system-on-kubernetes-e52069390916
-https://www.endpointdev.com/blog/2022/01/kubernetes-101/
-https://www.javaguides.net/2022/12/deploy-spring-boot-mysql-application-to-docker.html
-https://github.com/RameshMF/springboot-docker-course/tree/main
-https://github.com/Java-Techie-jt/springboot-crud-k8s
-https://www.youtube.com/watch?v=pIPji3_rYPY
-https://www.youtube.com/watch?v=-ekBqIvAGY4
-https://www.youtube.com/watch?v=6hMHziv0T2Y
-https://medium.com/globant/kubernetes-deployment-deploying-mysql-databases-on-the-gke-8fa675d3d8a
-https://www.kindsonthegenius.com/deploy-springboot-with-mysql-to-kubernetes-minikube-step-by-step-tutorial/
-https://loft.sh/blog/kubernetes-persistent-volumes-examples-and-best-practices/
-insert into currency_exchange (conversion_id, conversion_value, conversion_from, conversion_to)
-values(1001, 82, 'USD', 'INR');
-insert into currency_exchange (conversion_id, conversion_value, conversion_from, conversion_to)
-values(1002, 89, 'EUR', 'INR');
-insert into currency_exchange (conversion_id, conversion_value, conversion_from, conversion_to)
-values(1003, 55, 'AUD', 'INR');
-insert into currency_exchange (conversion_id, conversion_value, conversion_from, conversion_to)
-values(1004, 103, 'GBP', 'INR');
-insert into currency_exchange (conversion_id, conversion_value, conversion_from, conversion_to)
-values(1005, 267, 'KWD', 'INR');
+1) https://openliberty.io/guides/kubernetes-intro.html#tearing-down-the-environment
+2) https://dev.to/musolemasu/deploy-a-mysql-database-server-in-kubernetes-static-dpc
+3) https://www.kindsonthegenius.com/deploy-springboot-with-mysql-to-kubernetes-minikube-step-by-step-tutorial/
+4) https://github.com/Java-Techie-jt/springboot-crud-k8s
+5) https://loft.sh/blog/kubernetes-persistent-volumes-examples-and-best-practices/
+6) https://medium.com/globant/kubernetes-deployment-deploying-mysql-databases-on-the-gke-8fa675d3d8a
+7) https://www.youtube.com/watch?v=qmDzcu5uY1I
+8) https://medium.com/@dayan888/sample-java-web-system-on-kubernetes-e52069390916
+
+
+sql query to insert dummy data into the database
+```bash 
+   insert into currency_exchange (conversion_id, conversion_value, conversion_from, conversion_to) values(1001, 82, 'USD', 'INR');
+   insert into currency_exchange (conversion_id, conversion_value, conversion_from, conversion_to) values(1002, 89, 'EUR', 'INR');
+   insert into currency_exchange (conversion_id, conversion_value, conversion_from, conversion_to) values(1003, 55, 'AUD', 'INR');
+   insert into currency_exchange (conversion_id, conversion_value, conversion_from, conversion_to) values(1004, 103, 'GBP', 'INR');
+   insert into currency_exchange (conversion_id, conversion_value, conversion_from, conversion_to) values(1005, 267, 'KWD', 'INR');
+```
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: mysqldb-configmap
 data:
-  database_url: mysqldb-service
-  database_name: currency_exchange_db
+  host: mysqldb-service
+  dbName: currency_exchange_db

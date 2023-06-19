@@ -31,7 +31,7 @@ public class CurrencyExchangeController {
 		return repository.saveAll(currencyExchange);
 	}
 
-	@GetMapping("/currency-exchange/indian-ruppee/for/{amount}")
+	@GetMapping("/currency-exchange/indian-rupee/for/{amount}")
 	public CurrencyExchangePojo getCurrencyExchange(@PathVariable("amount") BigDecimal conversionAmount) {
 
 		CurrencyExchangePojo responseCurrencyExchange = new CurrencyExchangePojo();

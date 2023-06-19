@@ -15,36 +15,36 @@ spec:
         app: currency-exchange
     spec:
       containers:
-      - image: devanurag/currency-exchange:0.0.9
+      - image: devanurag/currency-exchange:0.0.10
         name: currency-exchange
         ports:
         - containerPort: 8291
-        env:
-          - name: MYSQL_SPRING_PASSWORD
+        env:  # Setting Environment Variables
+          - name: DB_PASSWORD   # Setting Database password from Secret
             valueFrom:
               secretKeyRef:
                 name: mysqldb-secret
-                key: mysql-root-password
-          - name: MYSQL_SPRING_USERNAME
+                key: password
+          - name: DB_USERNAME   # Setting Database username from Secret
             valueFrom:
               secretKeyRef:
                 name: mysqldb-secret
-                key: mysql-root-username
-          - name: MYSQL_SPRING_HOSTNAME
+                key: username
+          - name: DB_HOST       # Setting Database host address from configMap
             valueFrom:
               configMapKeyRef:
                 name: mysqldb-configmap
-                key: database_url
-          - name: MYSQL_SPRING_DATABASE
+                key: host
+          - name: DB_NAME       # Setting Database name from configMap
             valueFrom:
               configMapKeyRef:
                 name: mysqldb-configmap
-                key: database_name
+                key: dbName
 ---
 # Define a 'Service' To Expose the application
-apiVersion: v1
-kind: Service
-metadata:
+apiVersion: v1          # Kubernetes API version
+kind: Service           # Kubernetes' resource kind we are creating
+metadata:               # Metadata of the resource kind we are creating
   name: currency-exchange-service
 spec:
   type: LoadBalancer
@@ -52,6 +52,6 @@ spec:
     - protocol: TCP
       port: 8291
       targetPort: 8291
-      nodePort: 30205
+      nodePort: 30199
   selector:
     app: currency-exchange

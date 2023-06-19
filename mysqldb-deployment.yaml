@@ -23,12 +23,12 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: mysqldb-secret
-                  key: mysql-root-password
-            - name: MYSQL_DATABASE
+                  key: password
+            - name: MYSQL_DATABASE     # Setting Database Name from a 'ConfigMap'
               valueFrom:
                 configMapKeyRef:
                   name: mysqldb-configmap
-                  key: database_name
+                  key: dbName
           ports:
             - containerPort: 3306
               name: mysqldb
